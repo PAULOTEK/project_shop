@@ -38,9 +38,11 @@ class _CounterPageState extends State<CounterPage> {
           ),
           IconButton(
             onPressed: () {
-              setState(() {
-                provider?.state.dec();
-              });
+              setState(
+                () {
+                  provider?.state.dec();
+                },
+              );
               if (kDebugMode) {
                 print(provider?.state.value);
               }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/models/cart.dart';
 import 'package:shop/utils/app_routes.dart';
 import 'package:shop/utils/enums.dart';
+import 'package:shop/viewModel/cart.viewmodel.dart';
 import 'package:shop/widgets/app_drawer.dart';
 import 'package:shop/widgets/badge.dart';
 import 'package:shop/widgets/product_grid.dart';
@@ -47,7 +47,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
               );
             },
           ),
-          Consumer<Cart>(
+          Consumer<CartViewModel>(
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.CART);
