@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/models/product.dart';
 import 'package:shop/utils/app_routes.dart';
+import 'package:shop/viewModel/product.viewmodel.dart';
 
 import '../viewModel/cart.viewmodel.dart';
 
@@ -10,7 +10,7 @@ class ProductGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
+    final product = Provider.of<ProductViewModel>(context, listen: false);
     final cart = Provider.of<CartViewModel>(context, listen: false);
 
     return ClipRRect(
@@ -18,7 +18,7 @@ class ProductGridItem extends StatelessWidget {
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: Consumer<Product>(
+          leading: Consumer<ProductViewModel>(
             builder: (ctx, product, _) => IconButton(
               onPressed: () {
                 product.toggleFavorite();

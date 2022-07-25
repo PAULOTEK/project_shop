@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shop/models/cart_item.dart';
-import 'package:shop/models/product.dart';
+import 'package:shop/viewModel/product.viewmodel.dart';
 
 class CartViewModel with ChangeNotifier {
   Map<String, CartItem> _items = {};
@@ -23,7 +23,7 @@ class CartViewModel with ChangeNotifier {
     return total;
   }
 
-  void addItem(Product product) {
+  void addItem(ProductViewModel product) {
     if (_items.containsKey(product.id)) {
       _items.update(
         product.id,

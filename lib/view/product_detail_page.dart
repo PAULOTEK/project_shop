@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/models/product.dart';
+import 'package:shop/viewModel/product.viewmodel.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({
@@ -8,7 +8,7 @@ class ProductDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Product product = ModalRoute.of(context)!.settings.arguments as Product;
+    final ProductViewModel product = ModalRoute.of(context)!.settings.arguments as ProductViewModel;
     return Scaffold(
       appBar: AppBar(
         title: Text(product.name),
