@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shop/models/cart_item.dart';
-import 'package:shop/viewModel/product.viewmodel.dart';
+import 'package:shop/viewModel/product.view_model.dart';
 
 class CartViewModel with ChangeNotifier {
   Map<String, CartItem> _items = {};

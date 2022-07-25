@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/viewModel/product.viewmodel.dart';
+import 'package:shop/viewModel/product.view_model.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({

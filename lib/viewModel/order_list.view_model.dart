@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shop/models/order.dart';
 import 'package:shop/utils/misc/constants.dart';
-import 'package:shop/viewModel/cart.viewmodel.dart';
+import 'package:shop/viewModel/cart.view_model.dart';
 
 import '../models/cart_item.dart';
 

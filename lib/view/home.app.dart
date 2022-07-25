@@ -7,9 +7,9 @@ import 'package:shop/view/product_detail_page.dart';
 import 'package:shop/view/product_form_page.dart';
 import 'package:shop/view/products_overview_page.dart';
 import 'package:shop/view/products_page.dart';
-import 'package:shop/viewModel/cart.viewmodel.dart';
-import 'package:shop/viewModel/order_list.viewmodel.dart';
-import 'package:shop/viewModel/product_list.viewmodel.dart';
+import 'package:shop/viewModel/cart.view_model.dart';
+import 'package:shop/viewModel/order_list.view_model.dart';
+import 'package:shop/viewModel/product_list.view_model.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

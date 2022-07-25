@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/viewModel/cart.viewmodel.dart';
-import 'package:shop/viewModel/order_list.viewmodel.dart';
+import 'package:shop/viewModel/cart.view_model.dart';
+import 'package:shop/viewModel/order_list.view_model.dart';
 import 'package:shop/widgets/cart_item.dart';
 
 class CartPage extends StatelessWidget {

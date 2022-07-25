@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/repository/http_exception.dart';
 import 'package:shop/utils/app_routes.dart';
-import 'package:shop/viewModel/product.viewmodel.dart';
+import 'package:shop/viewModel/product.view_model.dart';
 
-import '../viewModel/product_list.viewmodel.dart';
+import '../viewModel/product_list.view_model.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductViewModel product;

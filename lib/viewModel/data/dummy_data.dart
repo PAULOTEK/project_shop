@@ -1,4 +1,4 @@
-import 'package:shop/viewModel/product.viewmodel.dart';
+import 'package:shop/viewModel/product.view_model.dart';
 
 final dummyProducts = [
   ProductViewModel(

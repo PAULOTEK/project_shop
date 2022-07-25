@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/viewModel/order_list.viewmodel.dart';
+import 'package:shop/viewModel/order_list.view_model.dart';
 import 'package:shop/widgets/app_drawer.dart';
 import 'package:shop/widgets/order.dart';
 

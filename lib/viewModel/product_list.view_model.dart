@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shop/utils/misc/constants.dart';
-import 'package:shop/viewModel/product.viewmodel.dart';
+import 'package:shop/viewModel/product.view_model.dart';
 
 import '../repository/http_exception.dart';
 

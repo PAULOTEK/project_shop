@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/viewModel/counter.dart';
+import 'package:shop/viewModel/counter.provider.dart';
 
 class CounterPage extends StatefulWidget {
   const CounterPage({
