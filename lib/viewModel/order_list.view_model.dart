@@ -9,7 +9,15 @@ import 'package:shop/viewModel/cart.view_model.dart';
 import '../models/cart_item.dart';
 
 class OrderListViewModel with ChangeNotifier {
-  final List<Order> _items = [];
+  final String _token;
+  final String _userId;
+  List<Order> _items = [];
+
+  OrderListViewModel([
+    this._token = '',
+    this._userId = '',
+    this._items = const [],
+  ]);
 
   List<Order> get items {
     return [..._items];
@@ -20,33 +28,37 @@ class OrderListViewModel with ChangeNotifier {
   }
 
   Future<void> loadOrders() async {
-    _items.clear();
+    List<Order> items = [];
 
     final response = await http.get(
-      Uri.parse('${Constants.ORDER_BASE_URL}.json'),
+      Uri.parse('${Constants.ORDER_BASE_URL}/$_userId.json?auth=$_token'),
     );
     if (response.body == 'null') return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach(
       (orderId, orderData) {
-        _items.add(
+        items.add(
           Order(
             id: orderId,
             date: DateTime.parse(orderData['date']),
             total: orderData['total'],
-            products: (orderData['products'] as List<dynamic>).map((item) {
-              return CartItem(
-                id: item['id'],
-                productId: item['productId'],
-                name: item['name'],
-                quantity: item['quantity'],
-                price: item['price'],
-              );
-            }).toList(),
+            products: (orderData['products'] as List<dynamic>).map(
+              (item) {
+                return CartItem(
+                  id: item['id'],
+                  productId: item['productId'],
+                  name: item['name'],
+                  quantity: item['quantity'],
+                  price: item['price'],
+                );
+              },
+            ).toList(),
           ),
         );
       },
     );
+
+    _items = items.reversed.toList();
     notifyListeners();
   }
 
@@ -54,19 +66,21 @@ class OrderListViewModel with ChangeNotifier {
     final date = DateTime.now();
 
     final response = await http.post(
-      Uri.parse('${Constants.ORDER_BASE_URL}.json'),
+      Uri.parse('${Constants.ORDER_BASE_URL}/$_userId.json?auth=$_token'),
       body: jsonEncode(
         {
           'total': cart.totalAmount,
           'date': date.toIso8601String(),
           'products': cart.items.values
-              .map((cartItem) => {
-                    'id': cartItem.id,
-                    'productId': cartItem.productId,
-                    'name': cartItem.name,
-                    'quantity': cartItem.quantity,
-                    'price': cartItem.price,
-                  })
+              .map(
+                (cartItem) => {
+                  'id': cartItem.id,
+                  'productId': cartItem.productId,
+                  'name': cartItem.name,
+                  'quantity': cartItem.quantity,
+                  'price': cartItem.price,
+                },
+              )
               .toList(),
         },
       ),

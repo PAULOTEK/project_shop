@@ -25,15 +25,11 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
     Provider.of<ProductListViewModel>(
       context,
       listen: false,
-    ).loadProducts().then(
-      (value) {
-        setState(
-          () {
-            _isLoading = false;
-          },
-        );
-      },
-    );
+    ).loadProducts().then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override
@@ -55,15 +51,13 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
               ),
             ],
             onSelected: (FilterOptions selectedValue) {
-              setState(
-                () {
-                  if (selectedValue == FilterOptions.Favorite) {
-                    _showFavoriteOnly = true;
-                  } else {
-                    _showFavoriteOnly = false;
-                  }
-                },
-              );
+              setState(() {
+                if (selectedValue == FilterOptions.Favorite) {
+                  _showFavoriteOnly = true;
+                } else {
+                  _showFavoriteOnly = false;
+                }
+              });
             },
           ),
           Consumer<CartViewModel>(
@@ -81,9 +75,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
         ],
       ),
       body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Center(child: CircularProgressIndicator())
           : ProductGrid(_showFavoriteOnly),
       drawer: const AppDrawer(),
     );

@@ -9,10 +9,18 @@ import 'package:shop/viewModel/product.view_model.dart';
 import '../repository/http_exception.dart';
 
 class ProductListViewModel with ChangeNotifier {
-  final List<ProductViewModel> _items = [];
+  final String _token;
+  final String _userId;
+  final List<ProductViewModel> _items;
 
   List<ProductViewModel> get items => [..._items];
   List<ProductViewModel> get favoriteItems => _items.where((prod) => prod.isFavorite).toList();
+
+  ProductListViewModel([
+    this._token = '',
+    this._userId = '',
+    this._items = const [],
+  ]);
 
   int get itemsCount {
     return _items.length;
@@ -22,11 +30,21 @@ class ProductListViewModel with ChangeNotifier {
     _items.clear();
 
     final response = await http.get(
-      Uri.parse('${Constants.PRODUCT_BASE_URL}.json'),
+      Uri.parse('${Constants.PRODUCT_BASE_URL}.json?auth=$_token'),
     );
     if (response.body == 'null') return;
+
+    final favResponse = await http.get(
+      Uri.parse(
+        '${Constants.USER_FAVORITES_URL}/$_userId.json?auth=$_token',
+      ),
+    );
+
+    Map<String, dynamic> favData = favResponse.body == 'null' ? {} : jsonDecode(favResponse.body);
+
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((productId, productData) {
+      final isFavorite = favData[productId] ?? false;
       _items.add(
         ProductViewModel(
           id: productId,
@@ -34,7 +52,7 @@ class ProductListViewModel with ChangeNotifier {
           description: productData['description'],
           price: productData['price'],
           imageUrl: productData['imageUrl'],
-          isFavorite: productData['isFavorite'],
+          isFavorite: isFavorite,
         ),
       );
     });
@@ -61,14 +79,13 @@ class ProductListViewModel with ChangeNotifier {
 
   Future<void> addProduct(ProductViewModel product) async {
     final response = await http.post(
-      Uri.parse('${Constants.PRODUCT_BASE_URL}.json'),
+      Uri.parse('${Constants.PRODUCT_BASE_URL}.json?auth=$_token'),
       body: jsonEncode(
         {
           "name": product.name,
           "description": product.description,
           "price": product.price,
           "imageUrl": product.imageUrl,
-          "isFavorite": product.isFavorite,
         },
       ),
     );
@@ -80,7 +97,6 @@ class ProductListViewModel with ChangeNotifier {
       description: product.description,
       price: product.price,
       imageUrl: product.imageUrl,
-      isFavorite: product.isFavorite,
     ));
     notifyListeners();
   }
@@ -90,7 +106,9 @@ class ProductListViewModel with ChangeNotifier {
 
     if (index >= 0) {
       await http.patch(
-        Uri.parse('${Constants.PRODUCT_BASE_URL}/${product.id}.json'),
+        Uri.parse(
+          '${Constants.PRODUCT_BASE_URL}/${product.id}.json?auth=$_token',
+        ),
         body: jsonEncode(
           {
             "name": product.name,
@@ -115,7 +133,9 @@ class ProductListViewModel with ChangeNotifier {
       notifyListeners();
 
       final response = await http.delete(
-        Uri.parse('${Constants.PRODUCT_BASE_URL}/${product.id}.json'),
+        Uri.parse(
+          '${Constants.PRODUCT_BASE_URL}/${product.id}.json?auth=$_token',
+        ),
       );
 
       if (response.statusCode >= 400) {
