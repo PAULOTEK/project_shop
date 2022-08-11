@@ -57,6 +57,12 @@ class MyApp extends StatelessWidget {
           ).copyWith(
             secondary: Colors.deepOrange,
           ),
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            },
+          ),
         ),
         // home: ProductsOverviewPage(),
         routes: {
