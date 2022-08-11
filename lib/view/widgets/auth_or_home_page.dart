@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop/view/auth_page.dart';
 import 'package:shop/view/products_overview_page.dart';
 
-import '../viewModel/auth.view_model.dart';
+import '../../viewModel/auth.view_model.dart';
 
 class AuthOrHomePage extends StatelessWidget {
   const AuthOrHomePage({Key? key}) : super(key: key);

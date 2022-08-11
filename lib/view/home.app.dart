@@ -11,7 +11,7 @@ import 'package:shop/viewModel/cart.view_model.dart';
 import 'package:shop/viewModel/order_list.view_model.dart';
 import 'package:shop/viewModel/product_list.view_model.dart';
 
-import 'auth_or_home_page.dart';
+import 'widgets/auth_or_home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
