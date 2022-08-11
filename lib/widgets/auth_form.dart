@@ -131,7 +131,7 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
       ),
       child: AnimatedContainer(
         padding: const EdgeInsets.all(16),
-        height: _isLogin() ? 310 : 400,
+        height: _isLogin() ? 330 : 400,
         width: deviceSize.width * 0.75,
         duration: const Duration(microseconds: 300),
         curve: Curves.linear,
